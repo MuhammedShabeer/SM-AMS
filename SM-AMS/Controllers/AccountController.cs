@@ -10,10 +10,10 @@ namespace SM_AMS.Controllers
         // GET: Account/Login
         public ActionResult Login()
         {
-            var Branches = new List<Branch>();
-            Branches.Add(new Branch { Id = 1, code = "A", Name = "Algiers" });
-            Branches.Add(new Branch { Id = 2, code = "O", Name = "Oran" });
-            Branches.Add(new Branch { Id = 3, code = "C", Name = "Constantine" });
+            var Branches = new List<BranchModel>();
+            Branches.Add(new BranchModel { Id = 1, code = "A", Name = "Algiers" });
+            Branches.Add(new BranchModel { Id = 2, code = "O", Name = "Oran" });
+            Branches.Add(new BranchModel { Id = 3, code = "C", Name = "Constantine" });
             SelectList BranchesList = new SelectList(Branches, "Id", "Name");
             ViewBag.BranchesList = BranchesList;
             return View();

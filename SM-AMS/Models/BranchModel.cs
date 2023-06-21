@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace SM_AMS.Models
 {
-    public class Branch
+    public class BranchModel
     {
         public int Id { get; set; }
 
