@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <div align="right">
+            <input type="button" value="Add" onclick="redirectToCreate()" />
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted"> User Managment</h6>
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Branch</th>
+                    <th>User type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+    function redirectToCreate() {
+        window.location.href = "/UserManagment/Create";
+    }
+</script>
+
