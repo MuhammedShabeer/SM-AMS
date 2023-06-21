@@ -1,12 +1,45 @@
-﻿
+﻿@model SM_AMS.Models.UserManagmentModel;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted"> User Managment</h6>
-
+@using (Html.BeginForm("Create", "UserManagment", FormMethod.Post))
+{
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted"> User Managment</h6>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "User Name" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.Branch, new SelectList(Model.BranchList, "Id", "Name"), "select branch.", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "invalid-feedback" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.UserType, new SelectList(Model.UserTypeList), "Select Usertype.", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "invalid-feedback" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div align="right">
+                        <input class="mb-2 btn btn-success mr-2" type="submit" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
+}

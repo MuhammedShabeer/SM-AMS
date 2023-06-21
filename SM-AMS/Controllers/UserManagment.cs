@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SM_AMS.Models;
+using SM_AMS.Services.UserAdmin;
 
 namespace SM_AMS.Controllers
 {
     public class UserManagment : Controller
     {
+        UserManagmentServices _services = new UserManagmentServices();
         // GET: UserManagment
         public ActionResult Index()
         {
-            return View();
+            return View(_services.GetUsers());
         }
 
         // GET: UserManagment/Details/5
@@ -20,16 +23,18 @@ namespace SM_AMS.Controllers
         // GET: UserManagment/Create
         public ActionResult Create()
         {
-            return View();
+            UserManagmentModel model = new UserManagmentModel();
+            return View(model);
         }
 
         // POST: UserManagment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserManagmentModel model)
         {
             try
             {
+                _services.SaveUsers(model);
                 return RedirectToAction(nameof(Index));
             }
             catch
