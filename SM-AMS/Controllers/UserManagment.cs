@@ -34,8 +34,15 @@ namespace SM_AMS.Controllers
         {
             try
             {
-                _services.SaveUsers(model);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _services.SaveUsers(model);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View(model);
+                }
             }
             catch
             {
