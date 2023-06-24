@@ -28,8 +28,11 @@ namespace SM_AMS.Services.UserAdmin
             string spName = "spSaveUsers";
             SqlParameter[] parameters = new SqlParameter[]
             {
+                new SqlParameter("@numID", model.Id),
                 new SqlParameter("@chvUserName", model.UserName),
-                new SqlParameter("@Parameter2", model.Email),
+                new SqlParameter("@chvEmail",model.Email),
+                new SqlParameter("@numBranchID",model.Branch),
+                new SqlParameter("@tnyUserType",model.UserTypeID)
             };
             dbManager.ExecuteNonQuery(spName, parameters);
         }

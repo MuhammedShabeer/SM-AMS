@@ -11,7 +11,7 @@ namespace SM_AMS.Services.ServerConnection
         //private readonly IConfiguration? configuration;
         public DatabaseManager()
         {
-            connectionString = "Data Source=LAPTOP-SMNTE418\\Shabeer;Initial Catalog=DBSM_AMS;Integrated Security=True;";
+            connectionString = "Data Source=LAPTOP-SMNTE418\\SQLEXPRESS;Initial Catalog=DBSM_AMS;Integrated Security=True;";
         }
         public DataTable GetDataTable(string storedProcedureName, SqlParameter[]? parameters = null)
         {

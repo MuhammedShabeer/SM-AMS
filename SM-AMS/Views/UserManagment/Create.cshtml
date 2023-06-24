@@ -1,4 +1,5 @@
 ﻿@model SM_AMS.Models.UserManagmentModel;
+@using static SM_AMS.Models.EnumModel;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,8 +28,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.UserType, new SelectList(Model.UserTypeList), "Select Usertype.", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "invalid-feedback" })
+                        @Html.DropDownListFor(model => model.UserTypeID, new SelectList(Enum.GetValues(typeof(enmUserType))), "Select Usertype.", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
             </div>
