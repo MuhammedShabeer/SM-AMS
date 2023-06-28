@@ -1,11 +1,8 @@
 ﻿@model SM_AMS.Models.UserManagmentModel;
 @using static SM_AMS.Models.EnumModel;
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 @using (Html.BeginForm("Create", "UserManagment", FormMethod.Post))
 {
+    @Html.HiddenFor(model => model.Id);
     <div class="card">
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted"> User Managment</h6>
@@ -13,34 +10,37 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "User Name" })
+                        @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.Branch, new SelectList(Model.BranchList, "Id", "Name"), "select branch.", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "invalid-feedback" })
+                        @Html.DropDownListFor(model => model.BranchID, new SelectList(Model.BranchList, "Id", "Name"), "select branch.", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.UserTypeID, new SelectList(Enum.GetValues(typeof(enmUserType))), "Select Usertype.", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "invalid-feedback" })
+                        @Html.DropDownListFor(model => model.UserType, Enum.GetValues(typeof(enmUserType)).Cast<enmUserType>().Select(e => new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() }), "Select User Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div align="right">
-                        <input class="mb-2 btn btn-success mr-2" type="submit" value="Save" />
-                    </div>
+                <div class="col-md-10"></div> <!-- Add an empty column to create space -->
+                <div class="col-md-1 p-0 d-flex justify-content-end">
+                    <input class="btn btn-success btnMinWd" type="submit" value="Save">
+                </div>
+                <div class="col-md-1 d-flex justify-content-end">
+                    <input class="btn btn-warning btnMinWd" type="button" onclick="window.location.href='@Url.Action("Index")';" value="Back">
                 </div>
             </div>
         </div>
     </div>
-
 }

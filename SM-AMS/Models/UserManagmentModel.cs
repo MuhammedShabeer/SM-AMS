@@ -23,12 +23,12 @@ namespace SM_AMS.Models
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Branch is required")]
-        public int? Branch { get; set; }
-
-        [Required(ErrorMessage = "User Type ID is required")]
-        public int? UserTypeID { get; set; }
+        public int? BranchID { get; set; }
+        public string? Branch { get; set; }
 
         public List<BranchModel> BranchList { get; set; }
+
+        [Required(ErrorMessage = "User Type is required")]
         public enmUserType UserType { get; set; }
 
     }

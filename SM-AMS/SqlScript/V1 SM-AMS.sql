@@ -23,10 +23,22 @@ BEGIN
 END;
 GO
 CREATE PROC dbo.spGetUsers
+    @numID	NUMERIC(18,0) = NULL
 AS
 BEGIN
-    SELECT [numID], [chvUserName], [chvEmail], [numBranchID], [tnyUserType]
-    FROM [dbo].[tbl_Users_Mst];
+    SELECT 
+	[numID], 
+	[chvUserName], 
+	[chvEmail], 
+	[numBranchID], 
+	CASE [numBranchID]
+	WHEN 1 THEN 'Algiers' 
+	WHEN 2 THEN 'Oran' 
+	WHEN 3 THEN 'Constantine' 
+	END Branch,
+	[tnyUserType]
+    FROM [dbo].[tbl_Users_Mst]
+	WHERE numID = ISNULL(numID,@numID)
 END;
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND object_id = OBJECT_ID('spSaveUsers'))
@@ -35,7 +47,7 @@ BEGIN
 END;
 GO
 CREATE PROCEDURE dbo.spSaveUsers
-    @numID		 NUMERIC(18,0),
+    @numID		 NUMERIC(18,0) =NULL,
     @chvUserName VARCHAR(255),
     @chvEmail	 VARCHAR(255),
     @numBranchID NUMERIC(18,0),
@@ -54,10 +66,8 @@ BEGIN
     ELSE
     BEGIN
         -- Insert a new record
-        INSERT INTO [dbo].[tbl_Users_Mst] ([numID], [chvUserName], [chvPassword], [chvEmail], [numBranchID], [tnyUserType])
-        VALUES (@numID, @chvUserName, @chvUserName, @chvEmail, @numBranchID, @tnyUserType);
+        INSERT INTO [dbo].[tbl_Users_Mst] ([chvUserName], [chvPassword], [chvEmail], [numBranchID], [tnyUserType])
+        VALUES (@chvUserName, @chvUserName, @chvEmail, @numBranchID, @tnyUserType);
     END;
 END;
 GO
-
-
