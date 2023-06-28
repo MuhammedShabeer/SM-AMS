@@ -8,26 +8,15 @@ namespace SM_AMS.Controllers
     public class UserManagment : Controller
     {
         UserManagmentServices _services = new UserManagmentServices();
-        // GET: UserManagment
         public ActionResult Index()
         {
             return View(_services.GetUsers());
         }
-
-        // GET: UserManagment/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserManagment/Create
         public ActionResult Create()
         {
-            UserManagmentModel model = new UserManagmentModel();
-            return View(model);
+            ViewData["Title"] = "Create user";
+            return View(new UserManagmentModel());
         }
-
-        // POST: UserManagment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserManagmentModel model)
@@ -49,41 +38,17 @@ namespace SM_AMS.Controllers
                 return View();
             }
         }
-
-        // GET: UserManagment/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewData["Title"] = "Edit user";
+            UserManagmentModel model = _services.GetUsers(id)[0];
+            return View("Create", model);
         }
-
-        // POST: UserManagment/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserManagment/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: UserManagment/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
             try
             {
+                _services.DeleteUser(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

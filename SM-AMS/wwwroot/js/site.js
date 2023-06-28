@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿function cmDelete(url) {
+    $.confirm({
+        title: 'Confirmation',
+        content: 'Are you sure you want to delete?',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+            confirm: {
+                text: 'Confirm',
+                btnClass: 'btn-red',
+                action: function () {
+                    window.location.href = url;
+                }
+            },
+            cancel: {
+                text: 'Cancel',
+                action: function () {
+                }
+            }
+        }
+    });
+}

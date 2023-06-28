@@ -11,7 +11,7 @@ namespace SM_AMS.Services.ServerConnection
         //private readonly IConfiguration? configuration;
         public DatabaseManager()
         {
-            connectionString = "Data Source=LAPTOP-SMNTE418\\SQLEXPRESS;Initial Catalog=DBSM_AMS;Integrated Security=True;";
+            connectionString = "data source=SHABEER-PC-2;initial catalog=DBSM_AMS;trusted_connection=true";
         }
         public DataTable GetDataTable(string storedProcedureName, SqlParameter[]? parameters = null)
         {
@@ -80,7 +80,7 @@ namespace SM_AMS.Services.ServerConnection
             ExecuteNonQuery(query);
         }
 
-        private void ExecuteNonQuery(string query)
+        public void ExecuteNonQuery(string query)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -95,5 +95,6 @@ namespace SM_AMS.Services.ServerConnection
         {
             return new SqlConnection(connectionString);
         }
+
     }
 }

@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SM_AMS.Models;
-
+using System.Text;
+using SM_AMS.Services.Security;
 namespace SM_AMS.Controllers
 {
     public class AccountController : Controller
@@ -34,6 +35,13 @@ namespace SM_AMS.Controllers
                 return View(model);
             }
         }
+        public ActionResult DptRdt(string encryptedUrl)
+        {
+            // Decrypt the URL
+            string decryptedUrl = SMSecurity.DecryptUrl(encryptedUrl);
 
+            // Redirect to the decrypted URL
+            return Redirect(decryptedUrl);
+        }
     }
 }
