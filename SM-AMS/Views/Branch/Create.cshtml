@@ -1,0 +1,36 @@
+﻿@model SM_AMS.Models.BranchModel;
+@using static SM_AMS.Models.EnumModel;
+@using (Html.BeginForm("Create", "Branch", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    ;
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted"> Branch Master</h6>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.code, new { @class = "form-control", placeholder = "Branch Code" })
+                        @Html.ValidationMessageFor(model => model.code, "", new { @class = "invalid-feedback" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Branch Name" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "invalid-feedback" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10"></div> <!-- Add an empty column to create space -->
+                <div class="col-md-1 p-0 d-flex justify-content-end">
+                    <input class="btn btn-success btnMinWd" type="submit" value="Save">
+                </div>
+                <div class="col-md-1 d-flex justify-content-end">
+                    <input class="btn btn-warning btnMinWd" type="button" onclick="window.location.href='@Url.Action("Index")';" value="Back">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
