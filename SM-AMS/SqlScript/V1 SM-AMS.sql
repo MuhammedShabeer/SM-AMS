@@ -71,3 +71,47 @@ BEGIN
     END;
 END;
 GO
+-------------------------------Athira-----------------------
+GO
+CREATE TABLE [dbo].[tbl_Branch_Mst](
+	[numBrID] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[chvBranchCode] [varchar](50) NOT NULL,
+	[chvBranchName] [varchar](200) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[numBrID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE OR ALTER PROCEDURE [dbo].[spSaveBranch]
+    @numBrID		 NUMERIC(18,0) =NULL,
+	@chvBranchCode varchar(50),
+    @chvBrName VARCHAR(200)
+AS
+BEGIN
+    IF EXISTS (SELECT * FROM [dbo].[tbl_Branch_Mst] WHERE [numBrID] = @numBrID)
+    BEGIN
+        UPDATE [dbo].[tbl_Branch_Mst]
+        SET chvBranchCode=@chvBranchCode,
+		chvBranchName=@chvBrName
+        WHERE [numBrID] = @numBrID;
+    END
+    ELSE
+    BEGIN
+        -- Insert a new record
+        INSERT INTO [dbo].[tbl_Branch_Mst] ([chvBranchCode],[chvBranchName])
+        VALUES (@chvBranchCode,@chvBrName);
+    END;
+END;
+GO
+CREATE OR ALTER PROC [dbo].[spGetBranch]
+    @numBrID	NUMERIC(18,0) = NULL
+AS
+BEGIN
+    SELECT 
+	numBrID,chvBranchCode,chvBranchName
+    FROM [dbo].[tbl_Branch_Mst]
+	WHERE [numBrID] = ISNULL(@numBrID,numBrID)
+END;
+GO
+----------------------Athira--------{End}--------
