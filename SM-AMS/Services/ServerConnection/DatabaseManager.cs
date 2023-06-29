@@ -11,7 +11,7 @@ namespace SM_AMS.Services.ServerConnection
         //private readonly IConfiguration? configuration;
         public DatabaseManager()
         {
-            connectionString = "data source=LAPTOP-NPE4V9DR\\SQLEXPRESS;initial catalog=DBSM_AMS;trusted_connection=true";
+            connectionString = "data source=LAPTOP-SMNTE418\\SQLEXPRESS;initial catalog=DBSM_AMS;trusted_connection=true";
         }
         public DataTable GetDataTable(string storedProcedureName, SqlParameter[]? parameters = null)
         {

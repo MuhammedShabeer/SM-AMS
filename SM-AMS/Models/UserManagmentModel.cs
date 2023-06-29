@@ -7,11 +7,11 @@ namespace SM_AMS.Models
     {
         public UserManagmentModel()
         {
-            BranchList = new List<BranchModel>
+            BranchList = new List<CMastersModel>
             {
-                new BranchModel { Id = 1, code = "A", Name = "Algiers" },
-                new BranchModel { Id = 2, code = "O", Name = "Oran" },
-                new BranchModel { Id = 3, code = "C", Name = "Constantine" }
+                new CMastersModel { Id = 1, code = "A", Name = "Algiers" },
+                new CMastersModel { Id = 2, code = "O", Name = "Oran" },
+                new CMastersModel { Id = 3, code = "C", Name = "Constantine" }
             };
         }
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace SM_AMS.Models
         public int? BranchID { get; set; }
         public string? Branch { get; set; }
 
-        public List<BranchModel> BranchList { get; set; }
+        public List<CMastersModel> BranchList { get; set; }
 
         [Required(ErrorMessage = "User Type is required")]
         public enmUserType UserType { get; set; }

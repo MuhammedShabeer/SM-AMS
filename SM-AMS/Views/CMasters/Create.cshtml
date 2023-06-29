@@ -1,22 +1,24 @@
-﻿@model SM_AMS.Models.BranchModel;
+﻿@model SM_AMS.Models.CMastersModel;
 @using static SM_AMS.Models.EnumModel;
-@using (Html.BeginForm("Create", "Branch", FormMethod.Post))
+@{
+    enmCMasters eCMasters = (enmCMasters)ViewBag.CMasters;
+}
+@using (Html.BeginForm("Create", "CMasters", new { CMasters = (int)eCMasters }, FormMethod.Post))
 {
-    @Html.HiddenFor(model => model.Id)
-    ;
+    @Html.HiddenFor(model => model.Id)    
     <div class="card">
         <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted"> Branch Master</h6>
+            <h6 class="card-subtitle mb-2 text-muted"> @eCMasters.ToString() Master</h6>
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        @Html.TextBoxFor(model => model.code, new { @class = "form-control", placeholder = "Branch Code" })
+                        @Html.TextBoxFor(model => model.code, new { @class = "form-control", placeholder = $"{eCMasters} Code" })
                         @Html.ValidationMessageFor(model => model.code, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Branch Name" })
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = $"{eCMasters} Name" })
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "invalid-feedback" })
                     </div>
                 </div>
@@ -27,7 +29,7 @@
                     <input class="btn btn-success btnMinWd" type="submit" value="Save">
                 </div>
                 <div class="col-md-1 d-flex justify-content-end">
-                    <input class="btn btn-warning btnMinWd" type="button" onclick="window.location.href='@Url.Action("Index")';" value="Back">
+                    <input class="btn btn-warning btnMinWd" type="button" onclick="window.location.href='@Url.Action("Index", new { @CMasters = (int)eCMasters })';" value="Back">
                 </div>
             </div>
         </div>
