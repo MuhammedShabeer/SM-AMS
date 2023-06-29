@@ -9,6 +9,11 @@
             Standard=2,
             Normal=3,
         }
-
+        public enum enmCMasters
+        {
+            Branch = 1,
+            Group = 2,
+            Department = 3,
+        }
     }
 }

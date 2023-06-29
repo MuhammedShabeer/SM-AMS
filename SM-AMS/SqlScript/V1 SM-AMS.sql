@@ -73,6 +73,8 @@ END;
 GO
 -------------------------------Athira-----------------------
 GO
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'tbl_Users_Mst' AND schema_id = SCHEMA_ID('dbo'))
+BEGIN
 CREATE TABLE [dbo].[tbl_Branch_Mst](
 	[numBrID] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
 	[chvBranchCode] [varchar](50) NOT NULL,
@@ -80,38 +82,65 @@ CREATE TABLE [dbo].[tbl_Branch_Mst](
 PRIMARY KEY CLUSTERED 
 (
 	[numBrID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+)) ON [PRIMARY]
+END
 GO
-CREATE OR ALTER PROCEDURE [dbo].[spSaveBranch]
-    @numBrID		 NUMERIC(18,0) =NULL,
-	@chvBranchCode varchar(50),
-    @chvBrName VARCHAR(200)
-AS
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND object_id = OBJECT_ID('spSaveCMasters'))
 BEGIN
-    IF EXISTS (SELECT * FROM [dbo].[tbl_Branch_Mst] WHERE [numBrID] = @numBrID)
-    BEGIN
-        UPDATE [dbo].[tbl_Branch_Mst]
-        SET chvBranchCode=@chvBranchCode,
-		chvBranchName=@chvBrName
-        WHERE [numBrID] = @numBrID;
-    END
-    ELSE
-    BEGIN
-        -- Insert a new record
-        INSERT INTO [dbo].[tbl_Branch_Mst] ([chvBranchCode],[chvBranchName])
-        VALUES (@chvBranchCode,@chvBrName);
-    END;
+    DROP PROCEDURE spSaveCMasters;
 END;
 GO
-CREATE OR ALTER PROC [dbo].[spGetBranch]
-    @numBrID	NUMERIC(18,0) = NULL
+CREATE PROCEDURE [dbo].[spSaveCMasters]
+    @numID		 NUMERIC(18,0) =NULL,
+	@chvCode	 VARCHAR(50),
+    @chvName	 VARCHAR(200),
+	@CMasters	 TINYINT
 AS
 BEGIN
-    SELECT 
-	numBrID,chvBranchCode,chvBranchName
-    FROM [dbo].[tbl_Branch_Mst]
-	WHERE [numBrID] = ISNULL(@numBrID,numBrID)
+	IF @CMasters = 1 --Branch
+	BEGIN
+		IF EXISTS (SELECT * FROM [dbo].[tbl_Branch_Mst] WHERE [numBrID] = @numID)
+		BEGIN
+		    UPDATE [dbo].[tbl_Branch_Mst] SET chvBranchCode=@chvCode,chvBranchName=@chvName WHERE [numBrID] = @numID;
+		END
+		ELSE
+		BEGIN
+		    INSERT INTO [dbo].[tbl_Branch_Mst] ([chvBranchCode],[chvBranchName]) VALUES (@chvCode,@chvName);
+		END;
+	END;
+END;
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND object_id = OBJECT_ID('spGetCMasters'))
+BEGIN
+    DROP PROCEDURE spGetCMasters;
+END;
+GO
+CREATE PROC [dbo].[spGetCMasters]
+    @numID	NUMERIC(18,0) = NULL,
+	@CMasters	 TINYINT
+AS
+BEGIN
+	IF @CMasters = 1 --Branch
+	BEGIN
+		SELECT numBrID numID,chvBranchCode chvCode,chvBranchName chvName FROM [dbo].[tbl_Branch_Mst] WHERE [numBrID] = ISNULL(@numID,numBrID)
+	END
 END;
 GO
 ----------------------Athira--------{End}--------
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND object_id = OBJECT_ID('spDeleteCMasters'))
+BEGIN
+    DROP PROCEDURE spDeleteCMasters;
+END;
+GO
+CREATE PROC [dbo].[spDeleteCMasters]
+    @numID		NUMERIC(18,0),
+	@CMasters	TINYINT
+AS
+BEGIN
+	IF @CMasters = 1 --Branch
+	BEGIN
+		DELETE [dbo].[tbl_Branch_Mst] WHERE [numBrID] = @numID
+	END
+END;
+GO
