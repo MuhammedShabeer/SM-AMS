@@ -23,11 +23,14 @@ namespace SM_AMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CMastersModel model, int CMasters)
         {
+            enmCMasters eCMasters = (enmCMasters)CMasters;
+            ViewData["Title"] = $"Create {eCMasters}";
+            ViewBag.CMasters = CMasters;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _services.SaveCMasters((enmCMasters)CMasters,model);
+                    _services.SaveCMasters(eCMasters, model);
                     return RedirectToAction("Index", new { @CMasters = CMasters });
                 }
                 else
@@ -37,7 +40,7 @@ namespace SM_AMS.Controllers
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
         public ActionResult Edit(int id, int CMasters)
