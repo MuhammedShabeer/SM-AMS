@@ -3,7 +3,7 @@
 @{
     enmCMasters eCMasters = (enmCMasters)ViewBag.CMasters;
 }
-@using (Html.BeginForm("Create", "CMasters", new { CMasters = (int)eCMasters }, FormMethod.Post))
+@using (Html.BeginForm("Create", "CMasters", new { CMasters = (int)eCMasters }, FormMethod.Post, null, new { @class = "valfrm" }))
 {
     @Html.HiddenFor(model => model.Id)    
     <div class="card">
@@ -13,13 +13,13 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.code, new { @class = "form-control", placeholder = $"{eCMasters} Code" })
-                        @Html.ValidationMessageFor(model => model.code, "", new { @class = "invalid-feedback" })
+                        @Html.ValidationMessageFor(model => model.code)
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = $"{eCMasters} Name" })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "invalid-feedback" })
+                        @Html.ValidationMessageFor(model => model.Name)
                     </div>
                 </div>
             </div>

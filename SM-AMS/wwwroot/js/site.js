@@ -1,4 +1,11 @@
-﻿function cmDelete(url) {
+﻿$(document).ready(function () {
+    $('Form').submit(function (event) {
+        if (!$(this).valid()) {
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+});
+function cmDelete(url) {
     $.confirm({
         title: 'Confirmation',
         content: 'Are you sure you want to delete?',
