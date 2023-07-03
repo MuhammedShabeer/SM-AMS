@@ -8,10 +8,13 @@ namespace SM_AMS.Services.ServerConnection
     public class DatabaseManager
     {
         string connectionString = "";
-        //private readonly IConfiguration? configuration;
         public DatabaseManager()
         {
-            connectionString = "data source=LAPTOP-SMNTE418\\SQLEXPRESS;initial catalog=DBSM_AMS;trusted_connection=true";
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
         public DataTable GetDataTable(string storedProcedureName, SqlParameter[]? parameters = null)
         {
