@@ -1,0 +1,43 @@
+[
+  {
+    "outputFileName": "wwwroot/css/TFTemplate.min.css",
+    "inputFiles": [
+      "wwwroot/TFTemplate/assets/css/bootstrap.min.css",
+      "wwwroot/TFTemplate/assets/css/font-awesome.min.css",
+      "wwwroot/TFTemplate/assets/css/line-awesome.min.css",
+      "wwwroot/TFTemplate/assets/plugins/alertify/alertify.min.css",
+      "wwwroot/TFTemplate/assets/plugins/lightbox/glightbox.min.css",
+      "wwwroot/TFTemplate/assets/plugins/c3-chart/c3.min.css",
+      "wwwroot/TFTemplate/assets/plugins/toastr/toatr.css",
+      "wwwroot/TFTemplate/assets/css/select2.min.css",
+      "wwwroot/TFTemplate/assets/css/bootstrap-datetimepicker.min.css",
+      "wwwroot/TFTemplate/assets/css/fullcalendar.min.css",
+      "wwwroot/TFTemplate/assets/plugins/summernote/dist/summernote-bs4.html",
+      "wwwroot/TFTemplate/assets/css/dataTables.bootstrap4.min.css",
+      "wwwroot/TFTemplate/assets/css/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/TFTemplate.min.js",
+    "inputFiles": [
+      "wwwroot/TFTemplate/assets/js/jquery-3.6.0.min.js",
+      "wwwroot/TFTemplate/assets/js/bootstrap.bundle.min.js",
+      "wwwroot/TFTemplate/assets/js/jquery.slimscroll.min.js",
+      "wwwroot/TFTemplate/assets/js/select2.min.js",
+      "wwwroot/TFTemplate/assets/js/moment.min.js",
+      "wwwroot/TFTemplate/assets/js/bootstrap-datetimepicker.min.js",
+      "wwwroot/TFTemplate/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js",
+      "wwwroot/TFTemplate/assets/js/jquery-ui.min.js",
+      "wwwroot/TFTemplate/assets/js/fullcalendar.min.js",
+      "wwwroot/TFTemplate/assets/js/jquery.fullcalendar.js",
+      "wwwroot/TFTemplate/assets/js/jquery.dataTables.min.js",
+      "wwwroot/TFTemplate/assets/js/dataTables.bootstrap4.min.js",
+      "wwwroot/TFTemplate/assets/js/validation.init.js",
+      "wwwroot/TFTemplate/assets/js/app.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

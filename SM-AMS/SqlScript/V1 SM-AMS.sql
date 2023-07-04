@@ -78,7 +78,8 @@ BEGIN
 CREATE TABLE [dbo].[tbl_Branch_Mst](
 	[numBrID] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
 	[chvBranchCode] [varchar](50) NOT NULL,
-	[chvBranchName] [varchar](200) NOT NULL
+	[chvBranchName] [varchar](200) NOT NULL,
+	CONSTRAINT UC_tbl_Branch_Mst_chvBranchCode UNIQUE (chvBranchCode),
 PRIMARY KEY CLUSTERED 
 (
 	[numBrID] ASC
